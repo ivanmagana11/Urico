@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>úricoimm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"LEMON MILK Bold";src:url("https://framerusercontent.com/assets/VcBvl2ZCH2kJERypJ3LDoieOY.woff2") format("woff2");font-display:swap;font-style:normal;font-weight:700}
+
+:root{
+  /* ===== Speed Bac palette ===== */
+  --bg:#f9ede2;          /* cream page background */
+  --ink:#040404;         /* black borders */
+  --ink2:#100c30;        /* deep navy (hard shadows / text) */
+  --navy:#0d2538;        /* CTA navy */
+  --navy2:#1e3b6f;       /* section navy */
+  --yellow:#ffd400;
+  --orange:#e47911;
+  --magenta:#f70088;
+  --pink:#ff87e1;
+  --cyan:#29b6e8;
+  --white:#fff;
+  --card:#fff;
+
+  /* semantic (nivel) */
+  --rojo:#e40039;
+  --amarillo:#ffd400;
+  --verde:#00a18d;
+  --line:#100c30;
+  --edge:#040404;
+
+  --display:"LEMON MILK Bold",Poppins,sans-serif;
+  --body:Poppins,system-ui,sans-serif;
+
+  --sbw:264px;
+  --sbwc:84px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--body);font-weight:500;background:var(--bg);color:var(--ink2);
+ padding-left:var(--sbw);transition:padding-left .22s ease}
+main{max-width:820px;margin:0 auto;padding:36px 20px 8px}
+
+/* ===== Typography ===== */
+h1{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+ font-size:clamp(40px,8vw,76px);line-height:.92;margin:0 0 10px;color:var(--ink2)}
+/* ===== Logo ===== */
+.logo-hero{display:block;width:300px;height:123px;margin:0 0 10px}
+.sb-logo{display:block;max-width:100%;height:auto}
+.sb.is-collapsed .sb-logo{width:48px;height:auto}
+h2{font-family:var(--display);text-transform:uppercase;letter-spacing:.5px;font-size:24px;margin:0 0 8px}
+small{font-size:13px;line-height:1.5}
+
+/* ===== Badges / pills ===== */
+.badge{display:inline-block;background:var(--pink);color:var(--ink2);border:3px solid var(--ink);
+ box-shadow:3px 3px 0 var(--ink2);border-radius:100px;padding:7px 16px;margin-bottom:16px;
+ font-family:var(--display);font-size:13px;letter-spacing:.4px;text-transform:uppercase}
+.lead{font-size:15px;line-height:1.6;color:var(--ink2);margin:0 0 4px}
+.lead b{font-weight:700}
+
+/* ===== Panel ===== */
+.panel{background:var(--card);border:3px solid var(--ink);border-radius:20px;box-shadow:8px 8px 0 var(--ink2);
+ padding:22px;margin:26px 0}
+
+/* ===== Form controls ===== */
+input,select,button{font:inherit}
+input,select{padding:12px 16px;border-radius:12px;border:3px solid var(--ink);background:#fff;color:var(--ink2);
+ font-family:var(--body);font-weight:600;box-shadow:3px 3px 0 color-mix(in srgb,var(--ink2) 22%, transparent)}
+input::placeholder{color:color-mix(in srgb,var(--ink2) 45%, transparent)}
+input:focus,select:focus{outline:none;box-shadow:3px 3px 0 var(--magenta)}
+.row{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
+.row input{flex:1}
+.row select{flex:0 0 auto}
+.box{position:relative}
+
+/* ===== Search suggestions ===== */
+#sug{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:3px solid var(--ink);
+ border-radius:14px;box-shadow:5px 5px 0 var(--ink2);z-index:5;display:none;overflow:hidden}
+#sug div{padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;gap:10px;
+ border-bottom:2px solid color-mix(in srgb,var(--ink2) 12%, transparent);font-size:14px}
+#sug div:last-child{border-bottom:0}
+#sug div:hover{background:var(--yellow)}
+#sug small{opacity:.7;font-size:12px}
+
+/* ===== Buttons (Speed Bac chunky pills) ===== */
+button{--s:4px;cursor:pointer;background:var(--magenta);color:#fff;border:3px solid var(--ink);border-radius:100px;
+ padding:12px 28px;min-height:48px;font-family:var(--display);font-weight:700;text-transform:uppercase;
+ letter-spacing:.5px;white-space:nowrap;box-shadow:var(--s) var(--s) 0 var(--ink2);
+ transition:transform .08s ease,box-shadow .08s ease}
+button:hover{transform:translate(2px,2px);box-shadow:calc(var(--s) - 2px) calc(var(--s) - 2px) 0 var(--ink2)}
+button:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink2)}
+
+/* ===== Result cards ===== */
+.card{background:var(--card);border:3px solid var(--ink);border-radius:20px;padding:16px 18px;margin:14px 0;
+ box-shadow:6px 6px 0 var(--ink2);border-left-width:12px}
+.card.rojo{border-left-color:var(--rojo)}
+.card.amarillo{border-left-color:var(--amarillo)}
+.card.verde{border-left-color:var(--verde)}
+.card .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card .top b{font-family:var(--display);text-transform:uppercase;letter-spacing:.3px;font-size:15px}
+.meter{height:14px;background:#f2eaef;border:2px solid var(--ink);border-radius:100px;overflow:hidden;margin:10px 0}
+.meter i{display:block;height:100%}
+.rojo i{background:var(--rojo)}
+.amarillo i{background:var(--amarillo)}
+.verde i{background:var(--verde)}
+.x{--s:3px;background:var(--navy2);padding:0 12px;min-height:34px;margin-left:10px;font-size:14px;border-radius:12px}
+
+/* ===== Disclaimer ===== */
+.disclaimer{margin:22px 0 0;padding:14px 16px;background:color-mix(in srgb,var(--yellow) 45%, transparent);
+ border:3px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 var(--ink2);font-size:13px;line-height:1.6}
+#msg{display:block;margin-top:10px;font-weight:600}
+
+/* ===== Sidebar (menu) ===== */
+.sb{position:fixed;top:0;left:0;bottom:0;width:var(--sbw);background:var(--bg);
+ border-right:3px solid var(--ink);box-shadow:6px 0 0 color-mix(in srgb,var(--ink2) 18%, transparent);
+ display:flex;flex-direction:column;z-index:40;transition:width .22s ease,transform .22s ease}
+.sb-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 16px;
+ border-bottom:3px solid var(--ink)}
+.sb-title{font-family:var(--display);text-transform:uppercase;font-size:17px;letter-spacing:.5px;color:var(--ink2);
+ white-space:nowrap;overflow:hidden;max-width:160px;transition:max-width .22s ease,opacity .18s ease}
+.sb-toggle,.sb-burger{--s:3px;display:inline-grid;place-items:center;width:38px;height:38px;min-height:38px;padding:0;
+ background:var(--cyan);color:var(--ink2);border:3px solid var(--ink);border-radius:12px;
+ box-shadow:var(--s) var(--s) 0 var(--ink2);flex:0 0 auto}
+.sb-toggle svg,.sb-burger svg{width:18px;height:18px}
+.sb-toggle:focus-visible,.sb-burger:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+.sb-nav{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:6px;overflow-y:auto}
+.sb-item{position:relative;display:flex;align-items:center;gap:12px;min-height:48px;padding:10px 14px;
+ border:3px solid transparent;border-radius:14px;background:transparent;color:var(--ink2);font:inherit;
+ font-size:14px;font-weight:600;letter-spacing:normal;text-decoration:none;text-shadow:none;white-space:nowrap;
+ cursor:pointer;text-align:left;box-shadow:none;
+ transition:background-color .18s ease,color .18s ease,transform .18s ease,border-color .18s ease}
+.sb-item:hover{background:color-mix(in srgb,var(--pink) 40%, transparent);border-color:var(--ink);transform:translateX(2px)}
+.sb-item:focus-visible{outline:3px solid var(--magenta);outline-offset:-2px}
+.sb-item.is-active{background:var(--magenta);color:#fff;border-color:var(--ink);box-shadow:3px 3px 0 var(--ink2)}
+.sb-ico{width:20px;height:20px;flex:0 0 auto;opacity:.75;transition:opacity .18s ease,color .18s ease}
+.sb-item:hover .sb-ico,.sb-item.is-active .sb-ico{opacity:1}
+.sb-item.is-active .sb-ico{color:#fff}
+.sb-label{min-width:0;overflow:hidden;text-overflow:ellipsis;max-width:180px;
+ transition:max-width .22s ease,opacity .18s ease,transform .18s ease}
+.tip{position:absolute;left:calc(100% + 14px);top:50%;transform:translate(-6px,-50%);
+ background:var(--ink2);color:#fff;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+ padding:6px 12px;border-radius:10px;font-family:var(--display);font-size:12px;text-transform:uppercase;
+ white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:60}
+.sb-foot{border-top:3px solid var(--ink);padding:14px 16px;display:flex;align-items:center;gap:10px;
+ font-size:12.5px;line-height:1.5;position:relative;color:var(--ink2)}
+.sb-foot b{font-family:var(--display)}
+.sb-foot-txt{min-width:0}
+.sb-foot-ico{display:none;position:relative;color:var(--ink2);opacity:.85;flex:0 0 auto}
+.sb-foot-ico svg{width:20px;height:20px}
+.sb-burger{display:none;position:fixed;top:16px;left:16px;z-index:50}
+.sb-overlay{position:fixed;inset:0;background:color-mix(in srgb,var(--ink2) 55%, transparent);opacity:0;
+ pointer-events:none;transition:opacity .22s ease;z-index:35;display:none}
+
+@media(min-width:768px){
+ body.sb-collapsed{padding-left:var(--sbwc)}
+ .sb.is-collapsed{width:var(--sbwc)}
+ .sb.is-collapsed .sb-head{justify-content:center;padding:18px 10px}
+ .sb.is-collapsed .sb-title{max-width:0;opacity:0}
+ .sb.is-collapsed .sb-nav{padding:14px 10px}
+ .sb.is-collapsed .sb-item{justify-content:center;padding:10px;gap:0}
+ .sb.is-collapsed .sb-label{max-width:0;opacity:0;transform:translateX(-6px)}
+ .sb.is-collapsed .sb-foot{justify-content:center;padding:14px 10px}
+ .sb.is-collapsed .sb-foot-txt{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .sb.is-collapsed .sb-foot-ico{display:block}
+ .sb.is-collapsed .sb-item:hover .tip,.sb.is-collapsed .sb-item:focus-visible .tip,
+ .sb.is-collapsed .sb-foot-ico:hover .tip{opacity:1;transform:translate(0,-50%)}
+}
+@media(max-width:767px){
+ body,body.sb-collapsed{padding-left:0}
+ .sb{width:280px;transform:translateX(-105%);box-shadow:8px 0 0 color-mix(in srgb,var(--ink2) 25%, transparent)}
+ .sb.is-open{transform:translateX(0)}
+ .sb-overlay{display:block}
+ .sb-overlay.is-on{opacity:1;pointer-events:auto}
+ .sb-burger{display:inline-grid}
+ main{padding-top:78px}
+}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* ===== Footer (Speed Bac navy) ===== */
+.site-footer{margin-top:56px;padding:48px 20px calc(48px + env(safe-area-inset-bottom));
+ background:var(--navy2);color:#fff;border-top:3px solid var(--ink)}
+.site-footer .footer-inner{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+.site-footer .footer-copy{font-family:var(--display);text-transform:uppercase;letter-spacing:.4px;font-size:13px;line-height:1.5;color:#fff}
+.site-footer .footer-grid{display:grid;grid-template-columns:1fr;gap:32px}
+.site-footer .footer-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+.site-footer .col-title{font-size:13px;font-weight:600;line-height:1.5;color:#fff}
+.site-footer .col-block{display:flex;flex-direction:column;gap:6px}
+.site-footer .col-text{font-size:13px;line-height:1.6;color:#fff}
+.site-footer .col-text.muted{color:color-mix(in srgb,#fff 70%, transparent)}
+.site-footer .clock{font-variant-numeric:tabular-nums;font-size:13px;line-height:1.6;color:var(--yellow)}
+.site-footer .city{font-size:13px;line-height:1.6;color:#fff}
+.site-footer .link-group{display:flex;flex-direction:column;gap:6px}
+.site-footer .footer-link{font-size:13px;line-height:1.6;color:#fff;text-decoration:none;width:fit-content;
+ border-bottom:2px solid transparent}
+.site-footer .footer-link:hover,.site-footer .footer-link:focus-visible{text-decoration:none;border-bottom-color:var(--yellow);outline:none}
+.site-footer .footer-link:focus-visible{outline:3px solid var(--yellow);outline-offset:2px;border-radius:2px}
+.site-footer .nl-text{font-size:13px;line-height:1.6;color:#fff}
+.site-footer .nl-form{display:grid;grid-template-columns:1fr;gap:8px}
+.site-footer .nl-row{display:grid;grid-template-columns:1fr;gap:8px}
+.site-footer .nl-field{display:flex;flex-direction:column;gap:6px}
+.site-footer .sr-only{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.site-footer .nl-input{appearance:none;background:#fff;color:var(--ink2);border:3px solid var(--ink);border-radius:12px;
+ padding:10px 14px;min-height:46px;font-size:16px;font-family:var(--body);font-weight:600;line-height:1.4;width:100%}
+.site-footer .nl-input::placeholder{color:color-mix(in srgb,var(--ink2) 45%, transparent)}
+.site-footer .nl-input:focus-visible{outline:none;box-shadow:3px 3px 0 var(--yellow)}
+.site-footer .nl-btn{appearance:none;background:var(--yellow);color:var(--ink2);border:3px solid var(--ink);
+ border-radius:100px;padding:10px 22px;min-height:46px;font-family:var(--display);font-weight:700;
+ text-transform:uppercase;letter-spacing:.5px;font-size:13px;line-height:1.4;cursor:pointer;
+ box-shadow:4px 4px 0 var(--ink);transition:transform .08s ease,box-shadow .08s ease}
+.site-footer .nl-btn:hover:not(:disabled),.site-footer .nl-btn:focus-visible:not(:disabled){transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink);outline:none}
+.site-footer .nl-btn:disabled{opacity:.7;cursor:wait}
+.site-footer .nl-msg{font-size:12.5px;line-height:1.6;color:#fff;min-height:1.6em}
+.site-footer .nl-msg.success{color:var(--yellow)}
+.site-footer .nl-msg.error{color:var(--pink)}
+.site-footer .nl-legal{font-size:12px;line-height:1.6;color:color-mix(in srgb,#fff 75%, transparent)}
+.site-footer .nl-legal .footer-link{font-size:12px;display:inline}
+@media(min-width:640px){.site-footer .footer-grid{grid-template-columns:1fr 1fr}.site-footer .nl-form{grid-template-columns:1fr auto}
+ .site-footer .nl-row{grid-template-columns:1fr 1fr}.site-footer .nl-email-wrap{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}
+ .site-footer .nl-btn-wrap{display:flex;align-items:start}}
+@media(min-width:1024px){.site-footer .footer-grid{grid-template-columns:1fr 1fr 1fr}.site-footer .footer-inner{max-width:1100px}}
+@media(prefers-reduced-motion:reduce){.site-footer .footer-link,.site-footer .nl-input,.site-footer .nl-btn{transition:none}}
+</style></head><body>
+
+<button class="sb-burger" id="sbBurger" aria-expanded="false" aria-controls="sb" aria-label="Abrir menú lateral">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
+
+<aside class="sb" id="sb" aria-label="Barra lateral">
+ <div class="sb-head">
+  <span class="sb-title"><img class="sb-logo" src="/img/logo.png" alt="úricoimm" width="1536" height="1024"></span>
+  <button class="sb-toggle" id="sbToggle" aria-expanded="true" aria-controls="sbNav" aria-label="Contraer menú lateral"></button>
+ </div>
+ <nav class="sb-nav" id="sbNav" aria-label="Navegación principal"></nav>
+ <div class="sb-foot">
+  <span class="sb-foot-ico" aria-hidden="true">
+   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+   <span class="tip">Información</span>
+  </span>
+  <span class="sb-foot-txt"><b>{{ total }}</b> registros · Información orientativa; no sustituye la opinión de un médico o nutriólogo.</span>
+ </div>
+</aside>
+<div class="sb-overlay" id="sbOverlay" aria-hidden="true"></div>
+
+<main>
+<span class="badge">purinas aprox. mg/100 g</span>
+<h1><img class="logo-hero" src="/img/logo.png" alt="úricoimm" width="300" height="123"></h1>
+<p class="lead">Efecto de los alimentos en el ácido úrico · <b>{{ total }}</b> registros</p>
+
+<section class="panel">
+ <div class="row"><select id="cat"><option value="">Todo</option><option value="comida">Comidas</option><option value="verdura">Verduras</option><option value="fruta">Frutas</option></select>
+ <div class="box" style="flex:1;display:flex"><input id="q" placeholder="Busca un alimento…" autocomplete="off" style="flex:1"><div id="sug"></div></div></div>
+ <div id="lista"></div>
+ <div class="row"><button onclick="crearPDF()">Crear PDF</button></div>
+ <small id="msg"></small>
+</section>
+
+<p class="disclaimer">en aurico.com nuestra única intención es la de ayudarte a tener una dieta menos invasiva en tu organismo, por lo que esta información es meramente informativa.</p>
+<p class="disclaimer">Información orientativa, no sustituye la opinión de un médico o nutriólogo. 🚩 ≥150 · 🟡 50–149 · 🟢 &lt;50 mg/100 g.</p>
+</main>
+
+<footer class="site-footer" role="contentinfo" aria-label="Pie de página">
+  <div class="footer-inner">
+    <div class="footer-copy">Todos los derechos reservados @ ImmDev <span id="footer-year"></span> Contacto <a class="footer-link" style="text-transform:none" href="mailto:pepepez11122@gmail.com">pepepez11122@gmail.com</a></div>
+    <div class="footer-grid">
+      <div class="footer-col" aria-label="Datos de la empresa">
+        <div class="col-block">
+          <div class="col-text">Desarrollo realizado por Iván Magaña. Si te gustó este sitio, imagina lo que puedo hacer para ti. ¿Hablamos? <a class="footer-link" style="text-transform:none" href="mailto:pepepez11122@gmail.com">pepepez11122@gmail.com</a></div>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Enlaces">
+        <div class="link-group">
+          <a class="footer-link" href="#inicio" aria-label="Ir a News">News</a>
+          <a class="footer-link" href="#inicio" aria-label="Ir a Listening Room">Listening Room</a>
+        </div>
+        <div class="link-group">
+          <a class="footer-link" href="#inicio" aria-label="Ir a Privacy Policy">Privacy Policy</a>
+          <a class="footer-link" href="#inicio" aria-label="Ir a Terms of Use">Terms of Use</a>
+        </div>
+        <div class="link-group">
+          <a class="footer-link" href="mailto:info@gricoimm.example" aria-label="Enviar correo a info@gricoimm.example">info@gricoimm.example</a>
+          <a class="footer-link" href="https://www.instagram.com/gricoimm" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram en nueva pestaña">Instagram</a>
+        </div>
+      </nav>
+      <div class="footer-col" aria-label="Mensajes">
+        <div class="nl-text">No encuentras el elemento buscado? mándanos mensaje con el elemento y lo agregamos.</div>
+        <form class="nl-form" id="nl-form" novalidate autocomplete="off" aria-live="polite">
+          <div class="nl-field" style="width:100%">
+            <label class="sr-only" for="nl-mensaje">Escribe Aquí</label>
+            <input class="nl-input" id="nl-mensaje" name="mensaje" type="text" placeholder="Escribe Aquí" inputmode="text" required aria-required="true" maxlength="2000">
+          </div>
+          <div class="nl-btn-wrap">
+            <button class="nl-btn" id="nl-btn" type="submit" aria-label="Enviar mensaje">OK</button>
+          </div>
+        </form>
+        <div class="nl-msg" id="nl-msg" aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== Sidebar: configuración del menú ===== */
+const menuItems=[
+ {title:"¿Qué es el Ácido Úrico?",icon:"lista",  route:"/acido-urico",active:false},
+ {title:"Preguntas y respuestas",icon:"buscar", route:"/preguntas",active:false},
+ {title:"¿Y ahora qué hago?",icon:"estrella",route:"/y-ahora-que-hago",active:false},
+ {title:"Mitos y realidades",icon:"carpeta",route:"/mitos-y-realidades",active:false}
+];
+const ICONS={
+ lista:'<path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+ buscar:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
+ estrella:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+ carpeta:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+ menu:'<path d="M4 7h16M4 12h16M4 17h16"/>',
+ chevron:'<path d="m9 6 6 6-6 6"/>'
+};
+const svgIcon=(n,cls)=>`<svg class="${cls||'sb-ico'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||ICONS.lista}</svg>`;
+
+const sb=document.getElementById('sb'),sbNav=document.getElementById('sbNav'),
+ sbToggle=document.getElementById('sbToggle'),sbBurger=document.getElementById('sbBurger'),
+ sbOverlay=document.getElementById('sbOverlay'),mq=matchMedia('(max-width:767px)'),
+ KEY='urico-sb-collapsed';
+
+menuItems.forEach(it=>{
+ const a=document.createElement('a');
+ a.className='sb-item'+(it.active?' is-active':'');
+ a.href=it.route||'/';
+ a.innerHTML=svgIcon(it.icon);
+ const l=document.createElement('span');l.className='sb-label';l.textContent=it.title;
+ const t=document.createElement('span');t.className='tip';t.setAttribute('aria-hidden','true');t.textContent=it.title;
+ a.append(l,t);
+ if(it.active)a.setAttribute('aria-current','page');
+ a.addEventListener('click',ev=>{
+  if(!it.route||it.route===location.pathname)ev.preventDefault();
+  sbNav.querySelectorAll('.sb-item').forEach(x=>{x.classList.remove('is-active');x.removeAttribute('aria-current')});
+  a.classList.add('is-active');a.setAttribute('aria-current','page');
+  if(mq.matches)closeDrawer();
+ });
+ sbNav.appendChild(a);
+});
+
+function setCollapsed(v){
+ sb.classList.toggle('is-collapsed',v);
+ document.body.classList.toggle('sb-collapsed',v);
+ sbToggle.setAttribute('aria-expanded',String(!v));
+ sbToggle.setAttribute('aria-label',v?'Expandir menú lateral':'Contraer menú lateral');
+ sbToggle.innerHTML=svgIcon(v?'chevron':'menu','');
+ try{localStorage.setItem(KEY,v?'1':'0')}catch(e){}
+}
+function openDrawer(v){
+ sb.classList.toggle('is-open',v);
+ sbOverlay.classList.toggle('is-on',v);
+ sbBurger.setAttribute('aria-expanded',String(v));
+ sbBurger.setAttribute('aria-label',v?'Cerrar menú lateral':'Abrir menú lateral');
+ document.body.style.overflow=v?'hidden':'';
+ if(v){const f=sbNav.querySelector('.sb-item');if(f)f.focus()}
+ else sbBurger.focus();
+}
+const closeDrawer=()=>{if(mq.matches)openDrawer(false)};
+
+sbToggle.addEventListener('click',()=>{mq.matches?openDrawer(false):setCollapsed(!sb.classList.contains('is-collapsed'))});
+sbBurger.addEventListener('click',()=>openDrawer(!sb.classList.contains('is-open')));
+sbOverlay.addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+mq.addEventListener('change',()=>{if(!mq.matches&&sb.classList.contains('is-open'))openDrawer(false)});
+
+let stored=null;try{stored=localStorage.getItem(KEY)}catch(e){}
+setCollapsed(stored!==null?stored==='1':window.innerWidth<1024);
+
+(function(){
+  const y=document.getElementById('footer-year');
+  if(y) y.textContent=new Date().getFullYear();
+  const el=document.getElementById('footer-clock');
+  if(!el)return;
+  const fmt=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  function tick(){ el.textContent=fmt.format(new Date()); }
+  tick();
+  const id=setInterval(tick,1000);
+  window.addEventListener('beforeunload',()=>clearInterval(id),{once:true});
+})();
+
+(function(){
+  const form=document.getElementById('nl-form');
+  const mensaje=document.getElementById('nl-mensaje');
+  const btn=document.getElementById('nl-btn');
+  const msg=document.getElementById('nl-msg');
+  if(!form)return;
+  const ENDPOINT=window.NEWSLETTER_ENDPOINT||'/api/newsletter';
+  function setMsg(t,cls){ if(!msg)return; msg.textContent=t||''; msg.className='nl-msg '+(cls||''); }
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    if(!mensaje||!btn)return;
+    const m=mensaje.value.trim();
+    if(!m){ setMsg('Escribe tu mensaje.','error'); mensaje.focus(); return; }
+    setMsg('','');
+    btn.disabled=true; btn.setAttribute('aria-busy','true');
+    const prev=btn.textContent; btn.textContent='...';
+    try{
+      const res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({mensaje:m})});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok) throw new Error(data.msg||'No se pudo enviar.');
+      setMsg('¡Gracias! Recibimos tu mensaje.','success');
+      form.reset();
+    }catch(err){
+      setMsg(err.message||'No se pudo enviar. Intenta más tarde.','error');
+    }finally{
+      btn.disabled=false; btn.removeAttribute('aria-busy'); btn.textContent=prev;
+    }
+  });
+})();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const q=document.getElementById('q'),sug=document.getElementById('sug'),lista=document.getElementById('lista');let sel=[],t;
+const e=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+q.oninput=()=>{clearTimeout(t);t=setTimeout(async()=>{
+ const v=q.value.trim();if(!v){sug.style.display='none';return}
+ const r=await (await fetch('/api/sugerir?q='+encodeURIComponent(v)+'&cat='+cat.value)).json();
+ sug.innerHTML='';r.forEach(i=>{const d=document.createElement('div');d.innerHTML=`<span>${e(i.nombre)}</span><small>${e(i.categoria)} · ${i.etiqueta}</small>`;d.onclick=()=>add(i);sug.appendChild(d)});
+ sug.style.display=r.length?'block':'none'},150)};
+q.onkeydown=ev=>{if(ev.key==='Enter'&&sug.firstChild)sug.firstChild.click()};
+function add(i){if(!sel.find(x=>x.nombre===i.nombre))sel.unshift(i);q.value='';sug.style.display='none';draw()}
+function draw(){lista.innerHTML=sel.map((i,n)=>`<div class="card ${i.color}"><div class="top"><b>${e(i.nombre)}</b><span>${i.etiqueta}<button class="x" onclick="sel.splice(${n},1);draw()">✕</button></span></div>
+<div class="meter ${i.color}"><i style="width:${Math.max(i.porcentaje,3)}%"></i></div><small>${i.purinas} mg de purinas/100 g · nivel ${i.nivel} · ${e(i.categoria)}</small></div>`).join('')}
+function crearPDF(){const m=document.getElementById('msg');
+ if(!window.jspdf){m.textContent='⚠️ No se pudo cargar el generador de PDF';return}
+ if(!sel.length){m.textContent='⚠️ Agrega al menos un alimento para generar el PDF';return}
+ const {jsPDF}=window.jspdf,doc=new jsPDF({unit:'pt',format:'a4'});
+ const ancho=doc.internal.pageSize.getWidth();let y=56;
+ doc.setFont('helvetica','bold');doc.setFontSize(22);doc.text('úricoimm',48,y);y+=20;
+ doc.setFont('helvetica','normal');doc.setFontSize(11);
+ doc.text('Reporte de consulta · purinas aprox. mg/100 g',48,y);y+=16;
+ doc.text('Fecha: '+new Date().toLocaleString('es-MX'),48,y);y+=20;
+ doc.setDrawColor(120);doc.line(48,y,ancho-48,y);y+=24;
+ sel.forEach(i=>{
+  if(y>740){doc.addPage();y=56}
+  doc.setFont('helvetica','bold');doc.setFontSize(12);doc.text(String(i.nombre),48,y);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);
+  doc.text(Math.round(i.purinas)+' mg  ·  nivel '+i.nivel+'  ·  '+i.categoria,48,y+14);
+  y+=36});
+ if(y>700){doc.addPage();y=56}
+ doc.setDrawColor(180);doc.line(48,y,ancho-48,y);y+=18;
+ doc.setFont('helvetica','italic');doc.setFontSize(9);
+ doc.text(doc.splitTextToSize('en aurico.com nuestra única intención es la de ayudarte a tener una dieta menos invasiva en tu organismo, por lo que esta información es meramente informativa.',ancho-96),48,y);
+ doc.save('reporte-uricoimm.pdf');m.textContent='✅ PDF creado'}
+</script></body></html>
