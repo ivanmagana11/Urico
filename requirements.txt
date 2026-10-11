@@ -1,0 +1,5 @@
+# Python dependencies
+mysql-connector-python
+python-dotenv
+flask
+werkzeug
